@@ -6,9 +6,9 @@
  */
  \Core\Start::getApp()->add(function ($request, $response, $next) {
      $route = $request->getAttribute('route');
-     print_r($route);
+    //  print_r($route);
      $this['args'] = $route ? $route->getArguments() : '';
-     print_r($this['args']);
+    //  print_r($this['args']);
      return $next($request, $response);
  });
 
