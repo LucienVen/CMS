@@ -6,4 +6,11 @@ return[
         'displayErrorDetails' => true, // set to false in production
         'determineRouteBeforeAppMiddleware' => true,
     ],
+
+    'db' => [
+        'host' => '127.0.0.1',
+        'user' => 'root',
+        'pass' => '123456',
+        'dbname' => 'CMS',
+    ],
 ];

@@ -12,9 +12,24 @@ $container = $app->getContainer();
  * monolog 日志记录
  * https://slimphp.app/docs/tutorial/first-app.html
  */
-$container['logger'] = function($c){
+$container['logger'] = function ($c) {
     $logger = new \Monolog\Logger('my_logger');
     $file_handler = new \Monolog\Handler\StreamHandler(LOGGER_PATH . "/app.log");
     $logger->pushHandler($file_handler);
     return $logger;
+};
+
+/**
+ * PDO 了解MYSQL
+ */
+$container['pdo'] = function ($c) {
+    $db = \Core\Config::get('db');
+    $pdo = new PDO(
+        "mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'],
+        $db['user'],
+        $db['pass']
+    );
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    return $pdo;
 };

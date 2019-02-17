@@ -25,9 +25,29 @@ class User extends \Core\Action
         return $this->_response->withJson($data, 200);
     }
 
-    // public function linkMysql()
-    // {
-    //     $data['id'] = $this->_args['id'];
-    //     return $this->_response->withJson($data, 200);
-    // }
+    
+
+    public function linkMysql()
+    {
+        // $data['id'] = $this->_args['id'];
+        // return $this->_response->withJson($data, 200);
+        $id = (int)$this->_args['id'];
+        $pdo = $this->_container->get('pdo');
+
+        // test logger
+        $logger = $this->_container->get('logger');
+        $logger->addInfo("test");
+
+        // 测试pdo链接
+        if (!$pdo) {
+            return $this->_response->withJson(['msg: db connect error!'], 500);
+        }
+
+        $sql = 'select * from user';
+        $stmt = $pdo->query($sql);
+        print_r($stmt->fetchAll());
+        
+
+
+    }
 }
