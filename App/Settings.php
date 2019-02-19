@@ -13,4 +13,27 @@ return[
         'pass' => '123456',
         'dbname' => 'CMS',
     ],
+
+    /**
+     * JWT 设置
+     */
+    'JWT' => [
+        // jwt 秘钥配置
+        'jwt_key' => 'LucienKey',
+        // issuer 请求实体，可以是发起请求的用户的信息，也可是jwt的签发者。
+        'iss' => 'Lucien',
+        // aud 接收该JWT的一方
+        'aud' => 'http://helloworld.com',
+        // 指定算法
+        'alg' => 'HS256',
+    ],
+
+    /**
+     * 数据库处理代码
+     */
+    'PDO' => [
+        // code => message
+        '100' => 'success',
+        '101' => 'insert error',
+    ],
 ];
