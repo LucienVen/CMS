@@ -46,4 +46,26 @@ class Action
         // 获取路由参数
         $this->_args = $container->get('args');
     }
+
+    /**
+     *  请求成功返回函数
+     */
+    public function success($data, $code=200)
+    {
+        return $this->_response->withJson($data, $code);
+    }
+
+    /**
+     * 请求失败返回函数
+     * TODO 完善错误信息系统（code => msg）
+     */
+    public function error($msg, $code = 400)
+    {
+        $data = [
+            'code' => $code,
+            'msg' => $msg,
+        ];
+        return $this->_response->withJson($data, $code);
+        
+    }
 }

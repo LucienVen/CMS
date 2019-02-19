@@ -49,4 +49,22 @@ class Test extends \Core\Action
         return $this->_response->write('Hello, World!');
     }
 
+    /**
+     * 测试post
+     */
+    public function post()
+    {
+        $name = $this->_request->getParam('name');
+        $age = $this->_request->getParam('age');
+        $data = [
+            'name' => $name,
+            'age' => $age,
+        ];
+        // $name = $obj['name'];
+        // return $this->_response->withJson($data, 200);
+
+        return $this->_response->withJson($data, 200);
+        
+    }
+
 }

@@ -15,6 +15,10 @@ $app->get('/link', '\App\Action\Test:link');
 $app->get('/middle_test', '\App\Action\Test:middle_test')
     ->add(new App\Middleware\TestMiddleware());
 
+// 测试post方法
+$app->post('/post', '\App\Action\Test:post');
+
+
 
 // test args called
 // $app->get('/hello/{name}', '\App\Action\User:test');
@@ -29,3 +33,4 @@ $app->get('/middle_test', '\App\Action\Test:middle_test')
 
 // user register
 $app->post('/registered', '\App\Action\User:registered');
+
