@@ -8,9 +8,11 @@
  class Model
  {
      protected $_code;
+     protected $_pdo;
 
-     public function __construct()
+     public function __construct($pdo)
      {
+         $this->_pdo = $pdo;
          $this->_code = \Core\Config::get('PDO');
      }
 
