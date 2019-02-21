@@ -25,7 +25,8 @@ return[
         // aud 接收该JWT的一方
         'aud' => 'http://helloworld.com',
         // 指定算法
-        'alg' => 'HS256',
+        'alg' => ['HS256'],
+        
     ],
 
     /**
@@ -35,5 +36,27 @@ return[
         // code => message
         '100' => 'success',
         '101' => 'insert error',
+    ],
+
+
+    /**
+     * 应用程序响应及错误代码
+     * code => msg
+     * success: code < 200
+     * prompt： 200 < code < 400
+     * error: code > 400
+     */
+    'status' => [
+        '200' => 'success',
+        '400' => 'error',
+
+        // JWT
+        '401' => 'Header Authorization Not Exists',
+
+        // Auth
+        '201' => 'login success',
+
+
+        // PDO
     ],
 ];
