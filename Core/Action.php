@@ -50,22 +50,33 @@ class Action
     /**
      *  请求成功返回函数
      */
-    public function success($data, $code=200)
+    public function success($code=200, $data = [])
     {
-        return $this->_response->withJson($data, $code);
+        // return $this->_response->withJson($data, $code);
+        $returnData = [
+            'code' => $code,
+            'msg' => \Core\Config::get('status')['code'],
+        ];
+
+        if (!empty($data)) {
+            $returnData['data'] = $data;
+        }
+
+        return $this->_response->withJson($returnData, 200);
     }
 
     /**
      * 请求失败返回函数
      * TODO 完善错误信息系统（code => msg）
      */
-    public function error($msg, $code = 400)
+    public function error($code = 400)
     {
-        $data = [
+        $returnData = [
             'code' => $code,
-            'msg' => $msg,
+            'msg' => \Core\Config::get('status')['code'],
         ];
-        return $this->_response->withJson($data, $code);
+
+        return $this->_response->withJson($returnData, 400);
         
     }
 }
