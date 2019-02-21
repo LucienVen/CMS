@@ -14,8 +14,8 @@ class User extends \Core\Action
         $email = $this->_request->getParam('email');
         $password = $this->_request->getParam('password');
 
-        $userModel = new UserModel();
-        $res = $userModel->registered($pdo, $email, $password);
+        $userModel = new UserModel($this->_container->get('pdo'));
+        $res = $userModel->registered($email, $password);
 
         if (100 != $res['code']) {
             return $this->error($res['msg'], $res['code']);

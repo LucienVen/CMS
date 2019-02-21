@@ -5,6 +5,7 @@
 namespace App\Action;
 
 use Core\Action;
+use App\Model\Test as TestModel;
 
 class Test extends \Core\Action
 {
@@ -64,7 +65,27 @@ class Test extends \Core\Action
         // return $this->_response->withJson($data, 200);
 
         return $this->_response->withJson($data, 200);
-        
     }
 
+    /**
+     * 测试pdo依赖注入
+     */
+    public function linkPdo()
+    {
+        $email = $this->_request->getParam('email');
+
+        $testModel = new TestModel($this->_container->get('pdo'));
+
+        $data = $testModel->getUserByEmail($email);
+        return $this->success($data, 200);
+
+    }
+
+    /**
+     * test JWT Middleware
+     */
+    public function userInfo()
+    {
+        // $this->success(200, new \App\Common\GetInfo($this->_request));
+    }
 }
