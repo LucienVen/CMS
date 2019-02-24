@@ -41,8 +41,8 @@ class Action
     public function __construct(\Slim\Container $container)
     {
         $this->_container = $container;
-        $this->_request = $container->get('request');
-        $this->_response = $container->get('response');
+        $this->_request = $this->_container->get('request');
+        $this->_response = $this->_container->get('response');
         // 获取路由参数
         $this->_args = $container->get('args');
     }
@@ -55,7 +55,7 @@ class Action
         // return $this->_response->withJson($data, $code);
         $returnData = [
             'code' => $code,
-            'msg' => \Core\Config::get('status')['code'],
+            'msg' => \Core\Config::get('status')[$code],
         ];
 
         if (!empty($data)) {

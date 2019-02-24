@@ -9,6 +9,11 @@ use App\Model\Test as TestModel;
 
 class Test extends \Core\Action
 {
+    // public function __construct(\Slim\Container $container)
+    // {
+    //     parent::__construct();
+    // }
+
     /**
      * 测试获取参数与json响应放回
      * @router \hello\{name}
@@ -86,6 +91,11 @@ class Test extends \Core\Action
      */
     public function userInfo()
     {
+        // print_r('hello world!');
         // $this->success(200, new \App\Common\GetInfo($this->_request));
+        // $myRequest = $this->_request;
+        $data = $this->_request->getAttributes();
+        
+        print_r($data);
     }
 }

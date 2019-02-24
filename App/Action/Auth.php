@@ -55,8 +55,9 @@ class Auth extends \Core\Action
             'iss' => $jwt_setting['iss'],
             'aud' => $jwt_setting['aud'],
             'exp' => time() + 3600 * 24,
-            'uid' => $userData['id'],
-            'email' => $userData['email']
+            // 'uid' => $userData['id'],
+            // 'email' => $userData['email']
+            'data' => $userData,
         );
         return JWT::encode($this->jwt, $jwt_setting['jwt_key']);
     }
