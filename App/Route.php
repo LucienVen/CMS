@@ -24,29 +24,10 @@ $app->get('/instanceof', '\App\Action\Test:instanceof');
 // test JWT Middleware (get user info)
 $app->get('/info', '\App\Action\Test:userInfo')
     ->add(new App\Middleware\JWTMiddleware);
-// $app->get('/info', function($request, $response, $args){
-    // $token = $request->getHeader('Authorization')[0];
-    // $jwt_config = \Core\Config::get('JWT');
-    // $decoded = \Firebase\JWT\JWT::decode($token, $jwt_config['jwt_key'], $jwt_config['alg']);
-    // $userData = (array)$decoded->data;
-    // print_r($userData);
-    // return null;
-// })
-// ->add(function($request, $response, $next){
-//     print_r('hhelllllll');
-//     return $next($request, $response);
-// });
-// ->add(new App\Middleware\JWTMiddleware);
-    // ->add(new App\Middleware\SlimJWTMiddleware);
 
 
-// test args called
-// $app->get('/hello/{name}', '\App\Action\User:test');
-// test link of mysql
-// $app->get('/user/{id}', '\App\Action\User:linkMysql')
-//     ->add(new App\Middleware\TestMiddleware());
 
-
+    
 /**
  * working
  */

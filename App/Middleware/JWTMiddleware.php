@@ -14,8 +14,6 @@ class JWTMiddleware
      * 请求头中获取 Authorization: Bearer <token>
      * 验证信息 JWT::decode
      */
-    
-
     public function __invoke($request, $response, $next)
     {
         // 判断token是否存在
@@ -25,18 +23,14 @@ class JWTMiddleware
 
         $token = $request->getHeader('Authorization')[0];
         $jwt_config = \Core\Config::get('JWT');
-        // print_r($jwt_config);
-        // print_r($token);
+        
         try {
             //当前时间减去60，把时间留点余地
             JWT::$leeway = 60;
             $decoded = JWT::decode($token, $jwt_config['jwt_key'], $jwt_config['alg']);
-            // 把JWT存储信息添加到请求体
+            // 把JWT存储信息添加到请求属性
             $userData = $decoded->data;
             $request = $request->withAttribute('userData', (array)$userData);
-            // print_r((array)$userData);
-            // $test = $request->getAttribute('userData');
-            // print_r($test);
 
         } catch (\Firebase\JWT\SignatureInvalidException $e) {  //签名不正确
             echo $e->getMessage();

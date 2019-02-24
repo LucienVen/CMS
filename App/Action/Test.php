@@ -9,9 +9,12 @@ use App\Model\Test as TestModel;
 
 class Test extends \Core\Action
 {
+
+    // protected $container;
     // public function __construct(\Slim\Container $container)
     // {
-    //     parent::__construct();
+    //     $this->container = $container;
+    //     parent::__construct($this->container);
     // }
 
     /**
@@ -89,13 +92,9 @@ class Test extends \Core\Action
     /**
      * test JWT Middleware
      */
-    public function userInfo()
+    public function userInfo($request, $response, $args)
     {
-        // print_r('hello world!');
-        // $this->success(200, new \App\Common\GetInfo($this->_request));
-        // $myRequest = $this->_request;
-        $data = $this->_request->getAttributes();
-        
+        $data = $request->getAttribute('userData');   
         print_r($data);
     }
 }
