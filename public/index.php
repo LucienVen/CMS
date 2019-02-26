@@ -17,6 +17,9 @@ define("CORE_PATH", __DIR__ . "/../Core");
 // Logger path
 define("LOGGER_PATH", __DIR__ . "/../Log");
 
+// Upload file path
+define("UPLOAD_FILE_PATH", __DIR__ . "/../File");
+
 // init Framework
 require CORE_PATH . "/Init.php";
 

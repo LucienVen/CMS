@@ -56,7 +56,11 @@ return[
         // Auth
         '201' => 'login success',
 
-
         // PDO
+
+        // upload file
+        '202' => 'upload file success',
+        '402' => 'not file upload',
+        
     ],
 ];

@@ -73,7 +73,7 @@ class Action
     {
         $returnData = [
             'code' => $code,
-            'msg' => \Core\Config::get('status')['code'],
+            'msg' => \Core\Config::get('status')[$code],
         ];
 
         return $this->_response->withJson($returnData, 400);

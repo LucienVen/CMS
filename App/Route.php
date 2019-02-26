@@ -25,7 +25,8 @@ $app->get('/instanceof', '\App\Action\Test:instanceof');
 $app->get('/info', '\App\Action\Test:userInfo')
     ->add(new App\Middleware\JWTMiddleware);
 
-
+// test upload file
+$app->post('/upload', '\App\Action\Test:upload');
 
     
 /**

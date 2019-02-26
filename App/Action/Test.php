@@ -97,4 +97,50 @@ class Test extends \Core\Action
         $data = $request->getAttribute('userData');   
         print_r($data);
     }
+
+    /**
+     * test upload file
+     */
+    public function upload($request, $response, $args)
+    {
+        $uploadedFiles = $request->getUploadedFiles();
+        // print_r($uploadedFiles);
+        // exit;
+        if (empty($uploadedFiles)) {
+            return $this->error(402);
+        }
+
+        $res = [];
+        foreach ($uploadedFiles as $file) {
+            if($file->getError() === UPLOAD_ERR_OK){
+                // print_r($file);
+                // print_r($file->getClientFilename());
+                $fileName = $this->moveUploadedFile($file);
+                if($fileName){
+                    $res[] = $fileName;
+                }
+            }
+        }
+
+        return $this->success(202, $res);
+    }
+
+    /**
+     * 文件改名以及移动至指定目录
+     *
+     * @param \Slim\Http\UploadedFile $uploadedFile
+     * @return void
+     */
+    protected function moveUploadedFile(\Slim\Http\UploadedFile $uploadedFile)
+    {
+        $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
+        $randomName = \bin2hex(\random_bytes(8));
+        $fileName = $randomName . '.' . $extension;
+        // print_r($fileName);
+        $uploadedFile->moveTo(UPLOAD_FILE_PATH . DIRECTORY_SEPARATOR . $fileName);
+        return $fileName;
+
+    }
+
+
 }
