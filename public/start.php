@@ -8,6 +8,7 @@
      $route = $request->getAttribute('route');
     //  print_r($route);
      $this['args'] = $route ? $route->getArguments() : '';
+     $this['routeName'] = $route->getName();
     //  print_r($this['args']);
      return $next($request, $response);
  });

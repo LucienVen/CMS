@@ -143,4 +143,35 @@ class Test extends \Core\Action
     }
 
 
+    /**
+     * 测试获取请求路径 
+     */
+    public function path($request, $response, $args)
+    {
+        // return $this->success(200);
+        print_r('path----');
+        // $route = $this->_container->get('callableResolver');
+
+        
+        // $route = $this->_container->get('router')->getNamedRoute('path');
+        // $callable = $route->getCallable();
+        // print_r($callable);
+        // print_r($callable[0]);
+        // foreach ($callable as $key => $value) {
+        //     print_r($key);
+            
+        //     print_r($value);
+        // }
+        // $res1 = (array)$callable
+        // print_r($callable);
+
+        // $prodClass = new \ReflectionClass($callable[0]);
+        // \Reflection::export($prodClass);
+        // print_r($prodClass->getShortName());
+
+        // $resolver = $this->_container->get('callableResolver');
+        // $res = $resolver->resolve($callable);
+        // print_r($res);
+    }
+
 }

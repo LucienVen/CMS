@@ -5,6 +5,8 @@
 
 namespace Core;
 
+use \Slim\CallableResolver;
+
 class Action
 {
     /**
@@ -36,6 +38,11 @@ class Action
     protected $_container;
 
     /**
+     * 路由名称
+     */
+    protected $_routeName;
+
+    /**
      * 初始化函数
      */
     public function __construct(\Slim\Container $container)
@@ -45,6 +52,8 @@ class Action
         $this->_response = $this->_container->get('response');
         // 获取路由参数
         $this->_args = $container->get('args');
+        $this->_routeName = $container->get('routeName');        
+
     }
 
     /**

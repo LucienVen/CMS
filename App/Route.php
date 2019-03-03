@@ -28,6 +28,11 @@ $app->get('/info', '\App\Action\Test:userInfo')
 // test upload file
 $app->post('/upload', '\App\Action\Test:upload');
 
+
+// test get request path
+$app->get('/path', '\App\Action\Test:path')
+    ->add(new App\Middleware\PermissionMiddleware($container));
+    // ->setName('path');
     
 /**
  * working

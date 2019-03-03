@@ -39,6 +39,18 @@ return[
     ],
 
 
+    'middleware_msg' => [
+        401 => 'jwt error!',
+    ],
+
+    // 权限分值设置
+    'permission' => [
+        'DELETE' => [4, 6, 5, 7],
+        'POST'  => [2, 6, 3, 7],
+        'PUTCH' => [2, 6, 3, 7],
+        'GET'   => [1, 3, 5, 7],
+    ],
+
     /**
      * 应用程序响应及错误代码
      * code => msg
