@@ -24,7 +24,7 @@ class GetInfo
 
         // user info
         // return $decoded['data'];
-        print_r($decoded);
+        // print_r($decoded);
         // return $this->thisRequest->write($decoded);
 
 

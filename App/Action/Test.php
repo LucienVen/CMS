@@ -149,7 +149,7 @@ class Test extends \Core\Action
     public function path($request, $response, $args)
     {
         // return $this->success(200);
-        print_r('path----');
+        print_r('----path----');
         // $route = $this->_container->get('callableResolver');
 
         

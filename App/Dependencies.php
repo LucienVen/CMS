@@ -35,4 +35,4 @@ $container['pdo'] = function ($c) {
 };
 
 // 复制\Slim\CallableResolver.php，实现查询路由调用
-$container['callableResolver'] = new \Core\CallableResolver($container);
+// $container['callableResolver'] = new \Core\CallableResolver($container);
