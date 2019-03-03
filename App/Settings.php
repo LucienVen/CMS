@@ -42,6 +42,7 @@ return[
     'middleware_msg' => [
         401 => 'jwt error!',
         403 => 'Auth Error',
+        451 => 'secret auth error',
     ],
 
     // 权限分值设置
@@ -67,7 +68,8 @@ return[
         '401' => 'Header Authorization Not Exists',
 
         // Auth
-        '201' => 'login success',
+        251 => 'login success',
+        462 => 'login false',
 
         // PDO
 

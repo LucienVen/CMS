@@ -23,7 +23,7 @@ $app->get('/instanceof', '\App\Action\Test:instanceof');
 
 // test JWT Middleware (get user info)
 $app->get('/info', '\App\Action\Test:userInfo')
-    ->add(new App\Middleware\JWTMiddleware);
+    ->add(new App\Middleware\JWTMiddleware($container));
 
 // test upload file
 $app->post('/upload', '\App\Action\Test:upload');
@@ -31,7 +31,8 @@ $app->post('/upload', '\App\Action\Test:upload');
 
 // test get request path
 $app->get('/path', '\App\Action\Test:path')
-    ->add(new App\Middleware\PermissionMiddleware($container));
+    ->add(new App\Middleware\PermissionMiddleware($container))
+    ->add(new App\Middleware\JWTMiddleware($container));
     // ->setName('path');
     
 /**
