@@ -41,6 +41,7 @@ return[
 
     'middleware_msg' => [
         401 => 'jwt error!',
+        403 => 'Auth Error',
     ],
 
     // 权限分值设置
