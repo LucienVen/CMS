@@ -30,4 +30,20 @@ class Auth extends \Core\Model
             print_r($e->getMessage());
         }
     }
+
+    // 注销操作，清除secret
+    public function clearSecret($uid)
+    {
+        try {
+            $sql = "update user set secret = '' where id = :uid";
+            $sth = $this->_pdo->prepare($sql);
+            $res = $sth->execute(array(':uid' => $uid));
+            if ($res) {
+                return true;
+            }
+            return false;
+        } catch (\PDOException $e) {
+            print_r($e->getMessage());
+        }
+    }
 }

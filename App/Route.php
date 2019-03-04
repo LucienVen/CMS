@@ -44,3 +44,7 @@ $app->post('/registered', '\App\Action\User:registered');
 
 // login 
 $app->post('/login', '\App\Action\Auth:login');
+
+// logout
+$app->delete('/logout', '\App\Action\Auth:logout')
+    ->add(new App\Middleware\JWTMiddleware($container));

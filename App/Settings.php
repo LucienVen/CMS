@@ -70,7 +70,10 @@ return[
 
         // Auth
         251 => 'login success',
-        462 => 'login false',
+        452 => 'login false',
+
+        252 => 'logout success',
+        453 => 'logout error',
 
         // PDO
 

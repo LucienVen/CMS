@@ -71,4 +71,16 @@ class Auth extends \Core\Action
         return JWT::encode($this->jwt, $jwt_setting['jwt_key']);
         // return JWT::encode($this->jwt, $secret);
     }
+
+    public function logout($request, $response, $args)
+    {
+        $userData = $request->getAttribute('userData');   
+        $uid = $userData['id'];
+        $AuthModel = new AuthModel($this->_container->get('pdo'));
+        if ($AuthModel->clearSecret($uid)) {
+            return $this->success(252);
+        }
+
+        return $this->error(453);
+    }
 }
