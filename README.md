@@ -18,16 +18,16 @@ the slime-based MVC framework
 ```bash
 # 基础项目框架
 CMS
-├── App										-- 应用程序
-├── Core									-- 框架核心类
-├── File									-- 上传文件文件夹
-├── Log										-- Monolog日志存放目录
+├── App									-- 应用程序
+├── Core								-- 框架核心类
+├── File								-- 上传文件文件夹
+├── Log									-- Monolog日志存放目录
 ├── README.md									
 ├── composer.json	
 ├── composer.lock
-├── help									-- 文档信息以及数据库文件
-├── public									-- 框架入口
-└── vendor									-- composer组件库
+├── help								-- 文档信息以及数据库文件
+├── public								-- 框架入口
+└── vendor								-- composer组件库
 
 # 框架核心类
 ./Core
@@ -41,12 +41,12 @@ CMS
 
 # 应用程序
 ./App
-├── Action									-- 行为控制器(Controller层)
+├── Action								-- 行为控制器(Controller层)
 │   ├── Auth.php											
 │   ├── Test.php
 │   └── User.php
 │   └── ...
-├── Common									-- 公共函数目录
+├── Common								-- 公共函数目录
 │   └── GetInfo.php
 │   └── ...
 ├── Middleware								-- 中间件
@@ -55,20 +55,20 @@ CMS
 │   ├── SlimJWTMiddleware.php
 │   └── TestMiddleware.php
 │   └── ...
-├── Model									-- 模型层(Model层)
+├── Model								-- 模型层(Model层)
 │   ├── Auth.php
 │   ├── Test.php
 │   └── User.php
 │   └── ...
-├── Route.php								-- 路由文件(TODO 细化拓展)
+├── Route.php							-- 路由文件(TODO 细化拓展)
 ├── Dependencies.php						-- 自定义容器服务
-└── Settings.php							-- 应用程序配置文件
+└── Settings.php						-- 应用程序配置文件
 
 
 # 入口文件目录
 ./public
-├── index.php								-- 入口文件
-└── start.php								-- 启动文件
+├── index.php							-- 入口文件
+└── start.php							-- 启动文件
 ```
 
 ### 综述
@@ -190,7 +190,7 @@ class className
 
 **请求头字段（必须）：Authorization** -> token
 
-
+***
 
 ##### 数据库设计
 
