@@ -49,11 +49,12 @@ return[
     'permission' => [
         'DELETE' => [4, 6, 5, 7],
         'POST'  => [2, 6, 3, 7],
-        'PUTCH' => [2, 6, 3, 7],
+        'PATCH' => [2, 6, 3, 7],
         'GET'   => [1, 3, 5, 7],
     ],
 
     /**
+     * TODO 统一规范状态码
      * 应用程序响应及错误代码
      * code => msg
      * success: code < 200
@@ -76,6 +77,12 @@ return[
         // upload file
         '202' => 'upload file success',
         '402' => 'not file upload',
+
+        // user control
+        261 => 'registered success',
+        461 => 'registered error',
+        462 => 'password no equal',
+
         
     ],
 ];
