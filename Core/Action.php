@@ -40,7 +40,7 @@ class Action
     /**
      * 路由名称
      */
-    protected $_routeName;
+    // protected $_routeName;
 
     /**
      * 初始化函数
@@ -52,7 +52,7 @@ class Action
         $this->_response = $this->_container->get('response');
         // 获取路由参数
         $this->_args = $container->get('args');
-        $this->_routeName = $container->get('routeName');        
+        // $this->_routeName = $container->get('routeName');        
 
     }
 

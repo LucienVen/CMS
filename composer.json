@@ -4,6 +4,7 @@
         "monolog/monolog": "^1.24",
         "illuminate/database": "~5.1",
         "tuupola/slim-jwt-auth": "^3.2",
-        "firebase/php-jwt": "^5.0"
+        "firebase/php-jwt": "^5.0",
+        "phpoffice/phpspreadsheet": "^1.6"
     }
 }

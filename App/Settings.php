@@ -78,8 +78,10 @@ return[
         // PDO
 
         // upload file
-        '202' => 'upload file success',
-        '402' => 'not file upload',
+        255 => 'upload file success',
+        455 => 'not file upload',
+        456 => 'upload file fail',
+        457 => 'excel file have no data',
 
         // user control
         261 => 'registered success',
