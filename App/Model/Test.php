@@ -13,4 +13,20 @@ class Test extends \Core\Model
         $res = $sth->execute(array('email' => $email));
         return $res;
     }
+
+    public function insertExcel($data)
+    {
+        $sql_pre = 'insert into subject_review(department, teacher, title, result, mark, reviewer) values ';
+
+        $sql_value = '';
+        foreach($data as $value){
+            $str = "('" . $value['department'] . "','" . $value['teacher'] . "','" . $value['title'] . "','" . $value['result'] . "','" . $value['mark'] . "','" . $value['reviewer'] . "'),";
+            $sql_value .= $str;
+        }
+
+        
+        $sql = $sql_pre . rtrim($sql_value, ',');
+        $res = $this->_pdo->exec($sql);
+        return $res;
+    }
 }

@@ -7,6 +7,11 @@ namespace App\Action;
 use Core\Action;
 use App\Model\Test as TestModel;
 
+// PhpSpreadsheet
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Xls\Worksheet;
+
 class Test extends \Core\Action
 {
 
@@ -86,7 +91,6 @@ class Test extends \Core\Action
 
         $data = $testModel->getUserByEmail($email);
         return $this->success($data, 200);
-
     }
 
     /**
@@ -94,7 +98,7 @@ class Test extends \Core\Action
      */
     public function userInfo($request, $response, $args)
     {
-        $data = $request->getAttribute('userData');   
+        $data = $request->getAttribute('userData');
         print_r($data);
     }
 
@@ -112,11 +116,11 @@ class Test extends \Core\Action
 
         $res = [];
         foreach ($uploadedFiles as $file) {
-            if($file->getError() === UPLOAD_ERR_OK){
+            if ($file->getError() === UPLOAD_ERR_OK) {
                 // print_r($file);
                 // print_r($file->getClientFilename());
                 $fileName = $this->moveUploadedFile($file);
-                if($fileName){
+                if ($fileName) {
                     $res[] = $fileName;
                 }
             }
@@ -139,12 +143,11 @@ class Test extends \Core\Action
         // print_r($fileName);
         $uploadedFile->moveTo(UPLOAD_FILE_PATH . DIRECTORY_SEPARATOR . $fileName);
         return $fileName;
-
     }
 
 
     /**
-     * 测试获取请求路径 
+     * 测试获取请求路径
      */
     public function path($request, $response, $args)
     {
@@ -174,4 +177,122 @@ class Test extends \Core\Action
         // print_r($res);
     }
 
+    // 测试容器pdo服务是否单例
+    public function pdo()
+    {
+        $testModel = new TestModel($this->_container->get('pdo'));
+        var_dump($testModel);
+        $testModel2 = new TestModel($this->_container->get('pdo'));
+        var_dump($testModel2);
+        $testModel3 = new TestModel($this->_container->get('pdo'));
+        var_dump($testModel3);
+
+        $pdo1 = $this->_container->get('pdo');
+        var_dump($pdo1);
+        $pdo2 = $this->_container->get('pdo');
+        var_dump($pdo2);
+        $pdo3 = $this->_container->get('pdo');
+        var_dump($pdo3);
+
+        // 容器服务，实现单例
+    }
+
+    /**
+     * PhpSpreadsheet 读写 excel
+     */
+    public function excel($request, $response, $args)
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'Welcome to Helloweba.');
+
+        $writer = new Xlsx($spreadsheet);
+        $file_path = UPLOAD_FILE_PATH . '/Export/hello.xlsx';
+        // $file_path = '/usr/local/var/www/CMS//File/Export/hello.xlsx';
+        // print_r($file_path);
+        // exit;
+        $res = $writer->save($file_path);
+    }
+
+    /**
+     * 上传文件，并存入数据库
+     */
+    public function uploadExcel($request, $response, $args)
+    {
+        $uploadedFiles = $request->getUploadedFiles();
+        // print_r($uploadedFiles);
+        if (empty($uploadedFiles)) {
+            return $this->error(455);
+        }
+
+        // 文件上传
+        $excel = $uploadedFiles['excel'];
+        if ($excel->getError() === UPLOAD_ERR_OK) {            
+            $fileName = $this->moveUploadedFile($excel);
+        }else {
+            return $this->error(456);
+        }
+
+        // 读取excel文件
+        $spreadsheet = $this->readExcel($fileName);
+
+        $worksheet = $spreadsheet->getActiveSheet();
+        $highestRow = $worksheet->getHighestRow(); // 总行数
+        $highestColumn = $worksheet->getHighestColumn(); // 总列数
+
+        // 判断是否存有数据
+        if ($highestRow - 2 <= 0) {
+            return $this->error(457);
+        }
+
+        // 表格数据转化成数组
+        $excel_array = [];
+        for($row = 3; $row <= $highestRow; $row++){
+            $row_data = [];
+            $row_data['department'] = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+            $row_data['teacher'] = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+            $row_data['title'] = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+            $row_data['result'] = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+            $row_data['mark'] = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+            $row_data['reviewer'] = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+            
+            $excel_array[] = $row_data;
+            
+        }
+
+        // print_r($excel_array);
+        $testModel = new TestModel($this->_container->get('pdo'));
+        $res = $testModel->insertExcel($excel_array);
+        print_r($res);
+
+        
+    }
+
+    // 读取excel 文件
+    protected function readExcel($fileName)
+    {
+        $file_path = UPLOAD_FILE_PATH . DIRECTORY_SEPARATOR . $fileName;
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+        $reader->setReadDataOnly(true);
+        $spreadsheet = $reader->load($file_path);
+
+        return $spreadsheet;
+        // print_r($spreadsheet);
+        // $worksheet = $spreadsheet->getActiveSheet();
+        // $highestRow = $worksheet->getHighestRow(); // 总行数
+        // $highestColumn = $worksheet->getHighestColumn(); // 总列数
+
+        // 判断数据表是否为空
+
+    }
+
+    // 选择行号，导出excel
+    public function export($request, $response, $args)
+    {
+        $data = $request->getParam('ids');
+        // print_r($data);
+        $ids = explode(',', $data);
+        // print_r($ids);
+    }
 }

@@ -35,11 +35,15 @@ $app->get('/path', '\App\Action\Test:path')
     ->add(new App\Middleware\JWTMiddleware($container));
     // ->setName('path');
     
+
+$app->get('/pdo', '\App\Action\Test:pdo');
+
+
 /**
  * working
  */
 
-// user register
+// register
 $app->post('/registered', '\App\Action\User:registered');
 
 // login 
@@ -48,3 +52,22 @@ $app->post('/login', '\App\Action\Auth:login');
 // logout
 $app->delete('/logout', '\App\Action\Auth:logout')
     ->add(new App\Middleware\JWTMiddleware($container));
+
+
+$app->group('/auth', function(){
+    $this->post('', '\App\Action\Auth:login');
+    $this->delete('', '\App\Action\Auth:logout');
+});
+
+/**
+ * excel opt
+ */
+$app->group('/excel', function(){
+    $this->get('', '\App\Action\Test:excel');
+    $this->post('/upload', '\App\Action\Test:uploadExcel');
+    // export
+    $this->post("/export", '\App\Action\Test:export');
+
+});
+
+// $app->get('/call/{ids}', '\App\Action\Test:export');
