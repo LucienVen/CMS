@@ -46,7 +46,7 @@ $app->get('/pdo', '\App\Action\Test:pdo');
 // register
 $app->post('/registered', '\App\Action\User:registered');
 
-// login 
+// login
 $app->post('/login', '\App\Action\Auth:login');
 
 // logout
@@ -54,7 +54,7 @@ $app->delete('/logout', '\App\Action\Auth:logout')
     ->add(new App\Middleware\JWTMiddleware($container));
 
 
-$app->group('/auth', function(){
+$app->group('/auth', function () {
     $this->post('', '\App\Action\Auth:login');
     $this->delete('', '\App\Action\Auth:logout');
 });
@@ -62,12 +62,26 @@ $app->group('/auth', function(){
 /**
  * excel opt
  */
-$app->group('/excel', function(){
+$app->group('/excel', function () {
     $this->get('', '\App\Action\Test:excel');
     $this->post('/upload', '\App\Action\Test:uploadExcel');
     // export
     $this->post("/export", '\App\Action\Test:export');
+});
 
+/**
+ * array sort test
+ */
+
+$app->group('/sort', function () {
+    // 测试快速排序
+    $this->get('/quickSort', 'App\Action\Sort:quickSort');
+    // 测试冒泡排序
+    $this->get('/bubbleSort', 'App\Action\Sort:bubbleSort');
+    // 测试选择排序 selectSort
+    $this->get('/selectSort', 'App\Action\Sort:selectSort');
+    // test
+    $this->get('/test', 'App\Action\Sort:test');
 });
 
 // $app->get('/call/{ids}', '\App\Action\Test:export');
